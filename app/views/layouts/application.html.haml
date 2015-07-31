@@ -1,0 +1,13 @@
+!!!5
+%html
+  %head{"ng-app"=>"root"}
+  %title FoosBallers
+  = stylesheet_link_tag 'application', media: 'all'#, 'data-turbolinks-track' => true
+  = javascript_include_tag 'application'#, 'data-turbolinks-track' => true
+  = csrf_meta_tags
+
+  %body
+    = render 'layouts/header'
+    = yield
+
+    = javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js'
