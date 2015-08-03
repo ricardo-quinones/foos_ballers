@@ -1,0 +1,8 @@
+= render layout: 'layouts/panel_view', locals: { header: 'Add Match', panel: 'addMatch'} do
+  .content-wrapper
+    %form{"name"=>"addMatchForm", "ng-controller"=>"AddMatchController", "no-validate"=>"", "form-submit"=>"addMatch()"}
+      %tags-input{"ng-model"=>"addMatchData.team_1", "placeholder"=>"Players for Team 1", "type"=>"text", "min-tags"=>"2", "max-tags"=>"2", "key-property"=>"player_id", "display-property"=>"name", "replace-spaces-with-dashes"=>"false","add-from-autocomplete-only"=>"true", "restrict-to-max-tags"=>""}
+        %auto-complete{"source"=>"loadTags($query)"}
+      %tags-input{"ng-model"=>"addMatchData.team_2", "placeholder"=>"Players for Team 2", "type"=>"text", "min-tags"=>"2", "max-tags"=>"2", "key-property"=>"player_id", "display-property"=>"name", "replace-spaces-with-dashes"=>"false","add-from-autocomplete-only"=>"true", "restrict-to-max-tags"=>""}
+        %auto-complete{"source"=>"loadTags($query)"}
+      %button{"type"=>"submit"} Add Match

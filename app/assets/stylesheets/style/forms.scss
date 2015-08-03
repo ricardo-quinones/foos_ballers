@@ -1,0 +1,70 @@
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  border-bottom: 1px solid $black;
+  @include padding(em(20px) em(10px));
+  width: 100%;
+  font-size: em(20px);
+
+  @include placeholder-content {
+    font-size: em(20px);
+  }
+
+  transition: border-color $default-bezier-transition;
+
+  &:focus {
+    outline: none;
+    border-color: $green;
+  }
+
+  + input[type="text"],
+  + input[type="email"],
+  + input[type="password"] {
+    margin-top: em(20px)
+  }
+}
+
+tags-input {
+  * { font-family: $font-family-base !important; }
+  border-bottom: 1px solid $black;
+
+  &:focus {
+    outline: none;
+    border-color: $green;
+  }
+
+  .host {
+    margin: 0;
+  }
+
+  .tags {
+    font-size: em(20px);
+    @include box-shadow(none !important);
+    border: none;
+    @include padding(em(16px) em(10px));
+    height: em(64px);
+
+    > input {
+      font-size: inherit !important;
+      height: 2em !important;
+    }
+
+    > .tag-list > .tag-item {
+      height: 2em;
+      font-size: inherit !important;
+      line-height: 2em;
+    }
+  }
+
+  & + tags-input {
+    margin-top: em(20px);
+  }
+}
+
+button {
+  width: 100%;
+  font-size: em(24px);
+  @include padding(em(16px) em(10px));
+  margin-top: 1.5em;
+}

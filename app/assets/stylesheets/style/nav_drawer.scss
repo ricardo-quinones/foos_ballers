@@ -1,0 +1,48 @@
+.nav-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15em;
+  padding: 0 40px;
+  z-index: 0;
+  background-color: $black;
+  color: white;
+  overflow: hidden;
+  height: 100%;
+}
+
+.nav-list {
+  margin: 1.5em 0;
+  list-style: none;
+  > li { list-style: none; }
+
+  &:first-child {
+    margin-top: 2em;
+  }
+}
+
+.nav-link {
+  padding: 0.2em 0;
+  color: white;
+
+  > * {
+    font-size: em(28px);
+  }
+}
+
+.nav-link a {
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.nav-social {
+  margin-bottom: 2em;
+  font-size: 0.8125em;
+
+  & > .icon-link + .icon-link {
+    margin-left: 0.6875em;
+  }
+}

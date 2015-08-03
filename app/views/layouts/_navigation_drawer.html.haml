@@ -1,0 +1,10 @@
+.nav-drawer{"ng-controller"=>"NavigationController"}
+  %ul.no-list-style.nav-list{"ng-if"=>"!loggedIn()"}
+    %li.nav-link
+      %a{"ng-click"=>"$emit('openPanel', 'login')"} Sign In
+
+  %ul.no-list-style.nav-list{"ng-if"=>"loggedIn()"}
+    %li.nav-link
+      %span {{ currentUser().name }}
+    %li.nav-link
+      %a{"ng-click"=>"logout()"} Log out

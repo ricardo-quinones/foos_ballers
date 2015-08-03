@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Player do
-  let(:player_1) { Player.create(name: 'Baller Bank') }
-  let(:player_2) { Player.create(name: 'Mean Greene') }
-  let(:player_3) { Player.create(name: 'Managed by Q') }
-  let(:player_4) { Player.create(name: 'Rusty Raymond') }
+  let(:player_1) { create(:player, :baller_bank) }
+  let(:player_2) { create(:player, :mean_greene) }
+  let(:player_3) { create(:player, :rusty_raymond) }
+  let(:player_4) { create(:player) }
 
   let(:team_1) { Team.create(player_1: player_1, player_2: player_2) }
   let(:team_2) { Team.create(player_1: player_3, player_2: player_4) }

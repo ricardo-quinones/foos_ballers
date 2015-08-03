@@ -1,0 +1,30 @@
+.ib-container {
+  > [class*="ib-col"] {
+    padding-left: em(15px);
+    padding-right: em(15px);
+  }
+}
+
+@for $i from 1 through 12 {
+  .ib-col-#{$i} {
+    display: inline-block;
+    width: $i / 12 * 100%;
+  }
+}
+
+// Create mapping of class naming aliases with the margin type properties
+$directions: (
+  top:    "top",
+  bottom: "bot",
+  right:  "right",
+  left:   "left"
+);
+
+// Auto producing these styles for 1px through 40px
+@for $i from 1 through 45 {
+  @each $push-type, $class-alias in $directions {
+    .push-#{$class-alias}-#{$i} {
+      margin-#{$push-type}: em($i * 1px);
+    }
+  }
+}

@@ -10,8 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+
+$(document).on('page:load', function() {
+  $('[ng-app]').each(function() {
+    module = $(this).attr('ng-app');
+    angular.bootstrap(this, [module]);
+  });
+});

@@ -1,13 +1,23 @@
 !!!5
-%html
-  %head{"ng-app"=>"root"}
+%html{"ng-app"=>"foosBallers"}
+  %head
   %title FoosBallers
-  = stylesheet_link_tag 'application', media: 'all'#, 'data-turbolinks-track' => true
-  = javascript_include_tag 'application'#, 'data-turbolinks-track' => true
+  = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.0.0/ng-tags-input.min.css'
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
   = csrf_meta_tags
 
-  %body
-    = render 'layouts/header'
-    = yield
+  %body{"ng-controller"=>"MainAppController", "ng-class"=>"{'is-pushed-left': navOpen}", "ng-init"=>"init(#{@current_user.try(:stats).to_json})"}
+    = render 'layouts/navigation_drawer'
 
-    = javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js'
+    .non-drawer-content
+      .non-drawer-content-overlay{"ng-click"=>"$emit('closeNav')"}
+      .scrollable-content
+        = render 'layouts/header'
+        = yield
+      %a.add-match{"ng-class"=>"{available: loggedIn(), unavailable: !loggedIn()}", "ng-click"=>"$emit('openPanel', 'addMatch')"}
+        %span.plus+
+      = render 'layouts/login_panel'
+      = render 'layouts/sign_up_panel'
+      = render 'layouts/add_match_panel'
+
+    = render 'layouts/included_javascripts'

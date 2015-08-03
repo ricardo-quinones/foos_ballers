@@ -1,0 +1,81 @@
+header {
+  position: relative;
+  height: 4em;
+  background-color: $blue;
+  color: white;
+
+  * { color: inherit; }
+
+  > nav {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: em($max-width);
+    @include padding(em(10px) em(40px));
+  }
+
+  .inner-nav-content {
+    height: 100%;
+    position: relative;
+  }
+
+  .logo, .menu {
+    position: absolute;
+    top: 50%;
+    @include translate(0%, -50%);
+  }
+
+  .logo {
+    left: 0;
+    font-size: em(32px);
+  }
+
+  .menu {
+    font-size: 1.5em;
+    right: 0;
+    text-decoration: none;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+header.orange {
+  background-color: $orange;
+}
+
+.panel-header {
+  font-size: em(32px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include translate(-50%, -50%);
+}
+
+.close-panel {
+  position: absolute;
+  right: 1.5em;
+  top: 50%;
+  @include translate(0%, -50%);
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:before {
+    font-size: 1.75em;
+  }
+}
+
+.error-banner {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  @include padding(em(10px));
+  background-color: $red;
+  display: none;
+  z-index: 1;
+}

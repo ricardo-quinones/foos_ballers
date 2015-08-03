@@ -1,0 +1,15 @@
+.panel-view {
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: top $default-bezier-transition;
+  overflow: hidden;
+}
+
+.open-panel {
+  top: 0;
+  overflow: auto;
+}

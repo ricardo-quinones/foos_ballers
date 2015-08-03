@@ -1,0 +1,61 @@
+.leader-board-table {
+  max-width: em($max-width);
+  @include margin(null auto null auto);
+  @include padding(em(40px) em(40px));
+
+  span {
+    font-size: em(20px);
+  }
+}
+
+.leader-board-header {
+  @extend .leader-board-row-side-padding;
+  > * { color: #aaa; }
+}
+
+.leader-board-list {
+  border-top: 1px solid $green;
+
+  > li + li {
+    border-top: 1px solid #ddd;
+  }
+}
+
+.leader-board-row-side-padding {
+  padding-left: em(40px);
+  padding-right: em(20px);
+}
+
+.player {
+  @extend .leader-board-row-side-padding;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.rank {
+  font-size: 1.25em;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 50%;
+  border: 1px solid $green;
+  background-color: white;
+  text-align: center;
+  color: $green;
+
+  @for $i from 1 through 3 {
+    &[rank="#{$i}"] {
+      background-color: $green;
+      color: white;
+    }
+  }
+}
+
+span {
+  color: inherit;
+}

@@ -11,3 +11,32 @@
 /log/*
 !/log/.keep
 /tmp
+*.swp
+*.swo
+dump.rdb
+
+# Ignore environment files
+*.env
+
+# Ignore osx DS stores
+.DS_Store
+
+# Ignore ctags files
+.tags*
+.gemtags
+
+# Ignore application configuration
+/config/application.yml
+/config/secrets.yml
+
+#Ignore .orig file
+*.orig
+
+#ignore ide files
+/.idea
+
+#rvm
+.rvmrc
+
+# Ignore auto created files
+__init__.py

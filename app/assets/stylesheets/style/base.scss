@@ -1,0 +1,119 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  position: relative;
+  @media only screen and (max-width: 640px) {
+    font-size: 14px;
+  }
+}
+
+.content-wrapper {
+  max-width: em($max-width);
+  @include margin(null auto null auto);
+  @include padding(em(40px) em(40px));
+}
+
+.container {
+  max-width: 100%;
+}
+
+.is-pushed-left {
+  .non-drawer-content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    @include translate3d(-15em, 0, 0);
+  }
+
+  .non-drawer-content-overlay {
+    display: block;
+  }
+
+  .nav-drawer {
+    overflow: auto;
+  }
+}
+
+.non-drawer-content {
+  background-color: white;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform $default-bezier-transition;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollable-content {
+  height: 100%;
+  overflow: scroll;
+}
+
+.non-drawer-content-overlay {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent; // For some Androids
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+}
+
+a {
+  cursor: pointer;
+}
+
+.add-match {
+  font-size: em(40px);
+  position: absolute;
+  bottom: 0.5em;
+  right: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: $red;
+  color: white;
+  text-decoration: none;
+  @include scale(0);
+  @include transition(box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1));
+  @include transition-delay(0.2s);
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+
+  &:active {
+    @include box-shadow(0 8px 17px 0 rgba(0, 0, 0, 0.2));
+    @include transition-delay(0s);
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  > .plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    margin-top: 3px;
+    margin-left: 2px;
+  }
+}
+
+.add-match.available {
+  @include animation(pulseIn 0.33s forwards);
+}
+
+.add-match.unavailable {
+  @include animation(pulseOut 0.33s forwards);
+}

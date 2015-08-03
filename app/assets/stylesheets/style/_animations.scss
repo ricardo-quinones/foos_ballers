@@ -1,0 +1,27 @@
+@include keyframes(pulseIn) {
+  0% {
+    @include scale(0);
+  }
+
+  80% {
+    @include scale(1.1);
+  }
+
+  100% {
+    @include scale(1);
+  }
+}
+
+@include keyframes(pulseOut) {
+  0% {
+    @include scale(1);
+  }
+
+  20% {
+    @include scale(1.1);
+  }
+
+  100% {
+    @include scale(0);
+  }
+}

@@ -1,0 +1,9 @@
+.panel-view{"ng-class"=>"{'open-panel': openPanel.#{panel}}"}
+  %header.orange
+    %nav.center
+      .inner-nav-content
+        .panel-header= header
+
+    %a.close-panel.glyphicon.glyphicon-remove{"ng-click"=>"$emit('closePanel', '#{panel}')"}
+
+  = yield

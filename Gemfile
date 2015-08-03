@@ -10,11 +10,14 @@ gem 'haml-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'sass-rails', '~> 5.0'
+gem 'bourbon'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'paperclip'
+gem 'factory_girl_rails', :require => false
+gem 'rails4-autocomplete', git: 'https://github.com/ricardo-quinones/rails4-autocomplete.git', branch: 'master'
 
 group :assets do
-  gem 'sass-rails', '~> 5.0'
-  gem 'coffee-rails', '~> 4.1.0'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.3.0'
@@ -28,6 +31,11 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller', '~> 0.7.2'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
 end
 
 # Use Unicorn as the app server

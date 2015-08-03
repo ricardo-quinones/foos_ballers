@@ -1,10 +1,19 @@
 class Player < ActiveRecord::Base
+  has_secure_password
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
   has_many :teams_as_player_1, class_name: 'Team', foreign_key: :player_1_id
   has_many :teams_as_player_2, class_name: 'Team', foreign_key: :player_2_id
   has_many :matches_as_player_1_on_team_1, through: :teams_as_player_1, source: :matches_as_team_1
   has_many :matches_as_player_1_on_team_2, through: :teams_as_player_1, source: :matches_as_team_2
   has_many :matches_as_player_2_on_team_1, through: :teams_as_player_2, source: :matches_as_team_1
   has_many :matches_as_player_2_on_team_2, through: :teams_as_player_2, source: :matches_as_team_2
+
+  validates_uniqueness_of :auth_token
+  validates_presence_of :email
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  before_create :generate_authentication_token!
 
   class << self
     def game_stats
@@ -51,5 +60,26 @@ class Player < ActiveRecord::Base
 
   def losses
     matches - wins
+  end
+
+  def reset_authentication_token!
+    generate_authentication_token!
+    save!
+  end
+
+  def encrypted_auth_token
+    Base64.strict_encode64(auth_token.to_s)
+  end
+
+  def stats
+    self.class.game_stats.where(id: id)[0]
+  end
+
+  private
+
+  def generate_authentication_token!
+    begin
+      self.auth_token = SecureRandom::base64(25)
+    end while self.class.exists?(auth_token: auth_token)
   end
 end

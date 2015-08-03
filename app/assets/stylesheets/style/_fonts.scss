@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Munro";
+  src:font-url("Munro.eot");
+  src:font-url("Munro.eot?#iefix") format("embedded-opentype"),
+    font-url("Munro.svg#handy") format("svg"),
+    font-url("Munro.ttf") format("truetype"),
+    font-url("Munro.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  color: $black;
+}

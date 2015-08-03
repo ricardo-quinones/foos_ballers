@@ -1,0 +1,19 @@
+// Colors
+$orange:     #EE9480;
+$black:      #5E5F60;
+$blue:       #8ACDCE;
+$green:      #62C38E;
+$yellow:     #4BB77C;
+$red:        #FB6F6F;
+$light-gray: #CCCCCC;
+
+$font-family-base: Munro, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.375;
+
+$max-width: 640px;
+
+// Cubic bezier transition
+$default-transition-timing:          0.33s;
+$default-transition-timing-function: cubic-bezier(.694, .0482, .335, 1);
+$default-bezier-transition: $default-transition-timing $default-transition-timing-function;

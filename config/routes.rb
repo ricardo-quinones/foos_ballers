@@ -3,8 +3,13 @@ Rails.application.routes.draw do
 
   namespace :api, constraints: { format: :json } do
     namespace :v1 do
-      resources :players, only: [:index, :show] do
+      resources :sessions, only: [:create] do
+        delete :destroy, on: :collection
       end
+      resources :players, only: [:index, :create, :show] do
+        get :autocomplete_player_name, on: :collection
+      end
+      resources :matches, only: [:create]
     end
   end
 end
