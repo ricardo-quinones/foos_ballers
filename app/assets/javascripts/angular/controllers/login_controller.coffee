@@ -9,6 +9,6 @@ angular.module('controllers.login', [])
         $scope.email        = null
         Session.currentUser = response.data.player
         $scope.$emit('closePanel', 'login')
-      .catch (response) ->
-        $scope.$emit('displayError', response.data.messages[0])
+      .catch (errorMessages) ->
+        $scope.$emit('displayError', errorMessages[0])
 ]

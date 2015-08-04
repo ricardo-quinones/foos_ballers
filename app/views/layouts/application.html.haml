@@ -16,6 +16,7 @@
         = yield
       %a.add-match{"ng-class"=>"{available: loggedIn(), unavailable: !loggedIn()}", "ng-click"=>"$emit('openPanel', 'addMatch')"}
         %span.plus+
+
       = render 'layouts/login_panel'
       = render 'layouts/sign_up_panel'
       = render 'layouts/add_match_panel'

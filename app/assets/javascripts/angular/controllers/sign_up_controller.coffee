@@ -8,6 +8,6 @@ angular.module('controllers.sign_up', [])
         Session.loginUserWithCredentials(response.data.auth_token, response.data.player)
         $scope.signUpFormData = {}
         $scope.$emit('closePanel', 'signUp')
-      .catch (response) ->
-        $scope.$emit('displayError', response.data.messages[0])
+      .catch (errorMessages) ->
+        $scope.$emit('displayError', errorMessages[0])
 ]

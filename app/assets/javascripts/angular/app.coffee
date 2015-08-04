@@ -22,12 +22,18 @@ angular.module('foosBallers', [
     $http.defaults.headers.common.Authorization = at
 ]
 
-.factory 'interceptHandler', ['$q',
-  ($q) ->
+.factory 'interceptHandler', ['$q', 'DEFAULT_ERROR_MESSAGE',
+  ($q, DEFAULT_ERROR_MESSAGE) ->
+    errorMessages = (response) ->
+      if _.isArray(response.data.messages)
+        response.data.messages
+      else
+        [DEFAULT_ERROR_MESSAGE]
+
     {
       responseError: (response) ->
         if response.status && response.status >= 300
-          $q.reject(response)
+          $q.reject(errorMessages(response))
         else
           response
     }

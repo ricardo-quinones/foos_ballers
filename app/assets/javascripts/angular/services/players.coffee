@@ -10,7 +10,7 @@ angular.module('services.players', [])
         @games     = player.games
         @games_won = -> player.games_won
 
-      winning_percentage: () ->
+      winning_percentage: ->
         parseInt(@games_won() / @games * 100)
 
     @fetch = ->
@@ -29,9 +29,6 @@ angular.module('services.players', [])
         getParams.params["ids_not_in[]"] = idsNotIn
 
       $http(getParams)
-      .then (response) ->
-        _.map response.data, (player) ->
-          { player_id: player.id, name: player.label }
 
     @create = (playerParams) ->
       $http.post("#{BASE_URL}/players", { player: playerParams })

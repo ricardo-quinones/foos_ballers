@@ -2,8 +2,8 @@ class Api::V1::MatchesController < Api::V1::BaseController
   def create
     team_1 = Team.where(team_1_params).first_or_create
     team_2 = Team.where(team_2_params).first_or_create
-    Match.create!(team_1: team_1, team_2: team_2)
-    head :created
+    match  = Match.create!(team_1: team_1, team_2: team_2)
+    render json: { id: match.id }, status: :created
   end
 
   private
