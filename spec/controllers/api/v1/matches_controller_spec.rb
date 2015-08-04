@@ -9,14 +9,8 @@ describe Api::V1::MatchesController, type: :controller do
 
     let(:match_params) do
       {
-        team_1: {
-          player_1_id: player_1.id,
-          player_2_id: player_2.id
-        },
-        team_2: {
-          player_1_id: player_3.id,
-          player_2_id: player_4.id
-        }
+        team_1: [player_1.id, player_2.id],
+        team_2: [player_3.id, player_4.id]
       }
     end
 

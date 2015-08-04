@@ -15,6 +15,22 @@ class Team < ActiveRecord::Base
       joins(:players).
       group(:id)
     end
+
+    # This method will check if the team exists and will return the id of that team.
+    # Useful for checking if a team should be created before creating a match.
+    #
+    # @param player_ids [Array] an array of player
+    # @return [Team] the team for that array of player ids
+    def find_team(player_ids)
+      hash_count  = TeamMember.
+                      where(player_id: player_ids).
+                      group(:team_id).
+                      having('COUNT(player_id) > ?', player_ids.length - 1).
+                      count
+
+      return unless hash_count.present?
+      find_by(id: hash_count.keys.first)
+    end
   end
 
   def losses

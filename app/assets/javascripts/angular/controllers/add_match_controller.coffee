@@ -17,14 +17,10 @@ angular.module('controllers.add_match', [])
     # Private functions
 
     addMatchData = ->
-      formData = { team_1: {}, team_2: {} }
-      angular.forEach $scope.team_1, (player, index) ->
-        formData.team_1["player_#{index + 1}_id"] = player.id
-
-      angular.forEach $scope.team_2, (player, index) ->
-        formData.team_2["player_#{index + 1}_id"] = player.id
-
-      formData
+      {
+        team_1: _.map($scope.team_1, (p) -> p.id),
+        team_2: _.map($scope.team_2, (p) -> p.id)
+      }
 
     teams = ->
       ($scope.team_1 || []).concat($scope.team_2 || [])
