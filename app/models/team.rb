@@ -11,7 +11,8 @@ class Team < ActiveRecord::Base
       select('array_agg(players.name) as player_names').
       select('COUNT(distinct matches.id) AS games').
       select("SUM(CASE WHEN match_participants.id = matches.winner_id THEN 1 ELSE 0 END) / 2 AS games_won").
-      joins(:matches).
+      joins('LEFT JOIN "match_participants" ON "match_participants"."team_id" = "teams"."id"').
+      joins('LEFT JOIN "matches" ON "matches"."id" = "match_participants"."match_id"').
       joins(:players).
       group(:id)
     end
@@ -31,6 +32,10 @@ class Team < ActiveRecord::Base
       return unless hash_count.present?
       find_by(id: hash_count.keys.first)
     end
+  end
+
+  def stats
+    self.class.game_stats.where(id: id)[0]
   end
 
   def losses

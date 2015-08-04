@@ -19,7 +19,10 @@ class Player < ActiveRecord::Base
       select(:name).
       select('COUNT(matches.id) AS games').
       select("SUM(CASE WHEN match_participants.id = matches.winner_id THEN 1 ELSE 0 END) AS games_won").
-      joins(:matches).
+      joins('LEFT JOIN "team_members" ON "team_members"."player_id" = "players"."id"').
+      joins('LEFT JOIN "teams" ON "teams"."id" = "team_members"."team_id"').
+      joins('LEFT JOIN "match_participants" ON "match_participants"."team_id" = "teams"."id"').
+      joins('LEFT JOIN "matches" ON "matches"."id" = "match_participants"."match_id"').
       group(:id).
       order('games_won DESC')
     end
