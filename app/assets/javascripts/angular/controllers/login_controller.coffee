@@ -7,7 +7,7 @@ angular.module('controllers.login', [])
       .then (response) ->
         $scope.password     = null
         $scope.email        = null
-
+        $scope.$emit('signedIn')
         if response.data.match
           $scope.$emit('updateCurrentMatch', response.data.match)
         else

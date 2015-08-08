@@ -114,6 +114,6 @@ a {
   @include animation(pulseIn 0.33s forwards);
 }
 
-.add-match.unavailable {
+.add-match.unavailable:not(.no-pulse) {
   @include animation(pulseOut 0.33s forwards);
 }

@@ -22,6 +22,9 @@ angular.module('controllers.main', [])
     $scope.$on 'closePanel', (e, panelType) ->
       $scope.openPanel[panelType] = false
 
+    $scope.$on 'signedIn', ->
+      $('.add-match').removeClass('no-pulse')
+
     $scope.$on 'updateCurrentMatch', (e, currentMatch) ->
       $scope.$broadcast('setCurrentMatch', currentMatch)
       $scope.$emit('openPanel', 'updateScore')
@@ -35,6 +38,7 @@ angular.module('controllers.main', [])
     $scope.init = (user) ->
       if user
         Session.currentUser = user
+        $scope.$emit('signedIn')
         Players.first_unfinished_match(Session.currentUser.id)
         .then (response) ->
           if response.data.match

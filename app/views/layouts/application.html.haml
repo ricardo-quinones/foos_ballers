@@ -14,7 +14,7 @@
       .scrollable-content
         = render 'layouts/header'
         = yield
-      %a.add-match{"ng-class"=>"{available: loggedIn(), unavailable: !loggedIn()}", "ng-click"=>"$emit('openPanel', 'addMatch')"}
+      %a.add-match.no-pulse{"ng-class"=>"{available: loggedIn(), unavailable: !loggedIn()}", "ng-click"=>"$emit('openPanel', 'addMatch')"}
         %span.plus+
 
       = render 'layouts/login_panel'
