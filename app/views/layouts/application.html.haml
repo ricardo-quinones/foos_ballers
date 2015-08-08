@@ -6,7 +6,7 @@
   = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
   = csrf_meta_tags
 
-  %body{"ng-controller"=>"MainAppController", "ng-class"=>"{'is-pushed-left': navOpen}", "ng-init"=>"init(#{@current_user.try(:stats).to_json})"}
+  %body{"ng-controller"=>"MainAppController", "ng-class"=>"{'open-nav': navOpen}", "ng-init"=>"init(#{@current_user.try(:stats).to_json})"}
     = render 'layouts/navigation_drawer'
 
     .non-drawer-content

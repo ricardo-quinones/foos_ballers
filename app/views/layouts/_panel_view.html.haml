@@ -4,6 +4,7 @@
       .inner-nav-content
         .panel-header= header
 
-    %a.close-panel.glyphicon.glyphicon-remove{"ng-click"=>"$emit('closePanel', '#{panel}')"}
+    - unless (no_close rescue false)
+      %a.close-panel.glyphicon.glyphicon-remove{"ng-click"=>"$emit('closePanel', '#{panel}')"}
 
   = yield

@@ -1,4 +1,4 @@
-= render layout: 'layouts/panel_view', locals: { header: 'Main Event', panel: 'updateScore', ng_controller: 'UpdateMatchScoreController'} do
+= render layout: 'layouts/panel_view', locals: { header: 'Main Event', panel: 'updateScore', ng_controller: 'UpdateMatchScoreController', no_close: true } do
   .content-wrapper.center{"ng-if"=>"currentMatch"}
     %form{"name"=>"updateMatchForm", "no-validate"=>"", "form-submit"=>"postScore()"}
       .match-participant-title {{ matchParticipantTitle(currentMatch.teams[0]) }}

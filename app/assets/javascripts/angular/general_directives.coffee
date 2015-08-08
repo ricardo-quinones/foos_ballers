@@ -69,6 +69,31 @@ angular.module('general_directives', [])
     }
 ]
 
+.directive 'focusElement', ->
+  {
+    link: (scope, elem, attr, ctrl) ->
+      findInput = ->
+        if elem.is('input') then elem else elem.find('input')
+
+      input = findInput()
+      if input
+        input.blur  -> elem.removeClass('focus')
+
+      scope.$on 'inputFocused', (e, elementToFocus) ->
+        elementToFocus.addClass('focus')
+
+      scope.$watch ->
+        try
+          eval("scope.#{attr.focusElement}")
+        catch
+          false
+      , (newVal, oldVal) ->
+        if newVal
+          input = findInput()[0]
+          input.focus() if input
+
+  }
+
 .directive 'restrictToMaxTags', ->
   KEY_BACKSPACE =  8
   KEY_TAB = 9
@@ -80,7 +105,7 @@ angular.module('general_directives', [])
         tagsInputScope = $element.isolateScope()
         input          = $element.find('input')
         maxTags        = if $attrs.maxTags then parseInt($attrs.maxTags, '10') else null
-        placeholder    = undefined
+        placeholder    = $element.attr('placeholder')
 
         getTags = ->
           ngModel.$modelValue
@@ -89,10 +114,11 @@ angular.module('general_directives', [])
           if reachedMaxTagLimit()
             # trigger the autocomplete to hide
             tagsInputScope.events.trigger('input-blur')
-            placeholder = input.attr('placeholder')
             input.attr('placeholder', '')
+            input.css('max-width', '8px')
           else
             input.attr('placeholder', placeholder)
+            input.css('max-width', '')
 
         reachedMaxTagLimit = ->
           tags = getTags()
@@ -111,6 +137,7 @@ angular.module('general_directives', [])
 
         # prevent the autocomplete from being triggered
         input.on 'focus', (event) ->
+          $scope.$emit('inputFocused', $element)
           if reachedMaxTagLimit()
             tagsInputScope.hasFocus = true
             event.stopImmediatePropagation()
