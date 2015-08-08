@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       end
       resources :players, only: [:index, :create, :show] do
         get :autocomplete_player_name, on: :collection
+        get :first_unfinished_match, on: :member
       end
       resources :matches, only: [:create, :update]
     end

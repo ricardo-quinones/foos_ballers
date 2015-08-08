@@ -1,5 +1,5 @@
 class Api::V1::PlayersController < Api::V1::BaseController
-  before_filter :get_player, only: [:show]
+  before_filter :get_player, only: [:show, :first_unfinished_match]
 
   def index
     render json: { players: Player.game_stats }, status: :ok
@@ -16,6 +16,10 @@ class Api::V1::PlayersController < Api::V1::BaseController
 
   def show
     render json: { player: @player.stats.as_json }, status: :ok
+  end
+
+  def first_unfinished_match
+    render :first_unfinished_match, formats: [:json], handlers: [:jbuilder], status: :ok
   end
 
   # Proc to be called by autocomplete api call to allow for better filtering of

@@ -7,8 +7,11 @@ angular.module('controllers.login', [])
       .then (response) ->
         $scope.password     = null
         $scope.email        = null
-        Session.currentUser = response.data.player
-        $scope.$emit('closePanel', 'login')
+
+        if response.data.match
+          $scope.$emit('updateCurrentMatch', response.data.match)
+        else
+          $scope.$emit('closePanel', 'login')
       .catch (errorMessages) ->
         $scope.$emit('displayError', errorMessages[0])
 ]

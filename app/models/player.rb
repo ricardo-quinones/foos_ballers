@@ -45,6 +45,10 @@ class Player < ActiveRecord::Base
     self.class.game_stats.where(id: id)[0]
   end
 
+  def get_first_unfinished_match
+    matches.includes(:players).unfinished.order('matches.id ASC').first
+  end
+
   private
 
   def generate_authentication_token!

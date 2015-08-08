@@ -1,7 +1,7 @@
 angular.module('controllers.main', [])
 
-.controller 'MainAppController', ['$scope', 'Session',
-  ($scope, Session) ->
+.controller 'MainAppController', ['$scope', 'Session', 'Players',
+  ($scope, Session, Players) ->
     $scope.openPanel = {}
 
     # Event listeners
@@ -33,5 +33,10 @@ angular.module('controllers.main', [])
       Session.currentUser?
 
     $scope.init = (user) ->
-      Session.currentUser = user if user
+      if user
+        Session.currentUser = user
+        Players.first_unfinished_match(Session.currentUser.id)
+        .then (response) ->
+          if response.data.match
+            $scope.$emit('updateCurrentMatch', response.data.match)
 ]

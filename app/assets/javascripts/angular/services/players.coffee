@@ -35,5 +35,8 @@ angular.module('services.players', [])
       .success (data, status, headers, config) =>
         @all.push(new Player(data.player))
 
+    @first_unfinished_match = (id) ->
+      $http.get("#{BASE_URL}/players/#{id}/first_unfinished_match")
+
     return @
 ]

@@ -150,4 +150,44 @@ describe Api::V1::PlayersController, type: :controller do
       its(:size) { is_expected.to eq(0) }
     end
   end
+
+  describe "GET first_unfinished_match" do
+    let(:auth_token) { player.encrypted_auth_token }
+
+    before do
+      request.headers['HTTP_AUTHORIZATION'] = auth_token
+      get :first_unfinished_match, id: player.id
+    end
+
+    context 'with an unfinished match' do
+      let!(:match) { create(:match) }
+      let(:player) { match.players.first }
+
+      before { get :first_unfinished_match, id: player.id }
+
+      context 'the response' do
+        subject { response }
+        its(:status) { is_expected.to eq(200) }
+      end
+
+      context 'the body of the response' do
+        subject { JSON.parse(response.body).with_indifferent_access }
+        its([:match]) { is_expected.not_to be_nil }
+      end
+    end
+
+    context 'with no unfinished matches' do
+      let(:player) { create(:player) }
+
+      context 'the response' do
+        subject { response }
+        its(:status) { is_expected.to eq(200) }
+      end
+
+      context 'the body of the response' do
+        subject { JSON.parse(response.body).with_indifferent_access }
+        its([:match]) { is_expected.to be_nil }
+      end
+    end
+  end
 end

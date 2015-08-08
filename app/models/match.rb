@@ -7,6 +7,10 @@ class Match < ActiveRecord::Base
 
   accepts_nested_attributes_for :match_participants
 
+  def self.unfinished
+    where(winner_id: nil)
+  end
+
   # @param nested_attributes_hash [Hash] nested attributes hash to update the scores of the match participants and declare a winner
   #
   # Sample hash looks like:
