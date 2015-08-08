@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'paperclip'
 gem 'factory_girl_rails', :require => false
 gem 'rails4-autocomplete', git: 'https://github.com/ricardo-quinones/rails4-autocomplete.git', branch: 'master'
+gem 'angular-rails-templates'
+gem 'sprockets', '2.12.3'
 
 group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

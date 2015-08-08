@@ -1,4 +1,4 @@
-.panel-view{"ng-class"=>"{'open-panel': openPanel.#{panel}}"}
+.panel-view{panel_attrs(panel, (ng_controller rescue nil))}
   %header.orange
     %nav.center
       .inner-nav-content

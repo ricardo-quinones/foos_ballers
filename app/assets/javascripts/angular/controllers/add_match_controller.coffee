@@ -7,7 +7,7 @@ angular.module('controllers.add_match', [])
       .then (response) ->
         $scope.team_1 = []
         $scope.team_2 = []
-        $scope.$emit('closePanel', 'addMatch')
+        $scope.$emit('updateCurrentMatch', response.data.match)
       .catch (errorMessages) ->
         $scope.$emit('displayError', errorMessages[0])
 

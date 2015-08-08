@@ -1,6 +1,7 @@
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   border: none;
   border-bottom: 1px solid $black;
   @include padding(em(20px) em(10px));
@@ -20,8 +21,19 @@ input[type="password"] {
 
   + input[type="text"],
   + input[type="email"],
-  + input[type="password"] {
+  + input[type="password"],
+  + input[type="number"] {
     margin-top: em(20px)
+  }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 
@@ -63,8 +75,11 @@ tags-input {
 }
 
 button {
-  width: 100%;
   font-size: em(24px);
   @include padding(em(16px) em(10px));
+}
+
+.submit-button {
+  width: 100%;
   margin-top: 1.5em;
 }

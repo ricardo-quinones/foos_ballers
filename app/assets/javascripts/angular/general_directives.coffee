@@ -27,6 +27,33 @@ angular.module('general_directives', [])
         return false
   }
 
+.directive 'matchParticipantScore', ['$compile', ($compile) ->
+  {
+    scope: {
+      participant: '=matchParticipantScore',
+      min:         '@',
+      max:         '@',
+      name:        '@formName'
+    },
+    templateUrl: "match_participant_score.html"
+  }
+]
+
+.directive 'scoringButton', ->
+  {
+    link: (scope, elem, attrs, ctrl) ->
+      min = parseInt(scope.min)
+      max = parseInt(scope.max)
+      elem.text(attrs.direction)
+
+      scope.updateScore = (symbol) ->
+        newScore = eval("scope.participant.goals #{symbol} 1")
+        scope.participant.goals = newScore if canUpdateScore(newScore)
+
+      canUpdateScore = (newScore) ->
+        newScore >= min
+  }
+
 .directive 'playerAutocomplete', ['BASE_URL',
   (BASE_URL) ->
     {

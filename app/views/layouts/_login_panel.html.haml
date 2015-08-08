@@ -3,5 +3,5 @@
     %form{"name"=>"loginForm", "ng-controller"=>"LoginController", "no-validate"=>"", "form-submit"=>"login()"}
       %input{"ng-model"=>"email", "placeholder"=>"Email", "type"=>"email"}
       %input{"ng-model"=>"password", "type"=>"password", "placeholder"=>"Password"}
-      %button{"type"=>"submit"} Log In
+      %button.submit-button{"type"=>"submit"} Log In
       %p.push-top-15.center Not a foosballer? Sign up <a ng-click="$emit('openPanel', 'signUp')">here</a>.

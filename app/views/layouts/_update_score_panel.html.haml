@@ -1,0 +1,12 @@
+= render layout: 'layouts/panel_view', locals: { header: 'Main Event', panel: 'updateScore', ng_controller: 'UpdateMatchScoreController'} do
+  .content-wrapper.center{"ng-if"=>"currentMatch"}
+    %form{"name"=>"updateMatchForm", "no-validate"=>"", "form-submit"=>"postScore()"}
+      .match-participant-title {{ matchParticipantTitle(currentMatch.teams[0]) }}
+
+      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[0]", "form-name"=>"team1Goals", "min"=>"0", "max"=>"10"}<
+      .vs vs
+      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[1]", "form-name"=>"team2Goals", "min"=>"0", "max"=>"10"}<
+
+      .match-participant-title {{ matchParticipantTitle(currentMatch.teams[1]) }}
+
+      %button.submit-button{"type"=>"submit"} Post Score

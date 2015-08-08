@@ -22,6 +22,10 @@ angular.module('controllers.main', [])
     $scope.$on 'closePanel', (e, panelType) ->
       $scope.openPanel[panelType] = false
 
+    $scope.$on 'updateCurrentMatch', (e, currentMatch) ->
+      $scope.$broadcast('setCurrentMatch', currentMatch)
+      $scope.$emit('openPanel', 'updateScore')
+
     $scope.currentUser = ->
       Session.currentUser
 

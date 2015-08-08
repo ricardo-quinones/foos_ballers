@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :players, only: [:index, :create, :show] do
         get :autocomplete_player_name, on: :collection
       end
-      resources :matches, only: [:create]
+      resources :matches, only: [:create, :update]
     end
   end
 end

@@ -4,5 +4,6 @@ angular.module('controllers', [
   'controllers.login',
   'controllers.sign_up',
   'controllers.leaderboard',
-  'controllers.add_match'
+  'controllers.add_match',
+  'controllers.update_match_score'
 ])

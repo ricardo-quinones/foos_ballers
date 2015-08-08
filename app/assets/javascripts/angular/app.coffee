@@ -1,4 +1,5 @@
 angular.module('foosBallers', [
+  'templates',
   'ngCookies',
   'ngTagsInput',
   'constants',

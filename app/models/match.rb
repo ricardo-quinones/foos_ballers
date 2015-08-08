@@ -19,7 +19,7 @@ class Match < ActiveRecord::Base
   def post_score!(nested_attributes_hash)
     nested_attributes_hash = nested_attributes_hash.with_indifferent_access
     winner_id = nested_attributes_hash[:match_participants_attributes].sort do |a, b|
-      b[:goals] <=> a[:goals]
+      b[:goals].to_i <=> a[:goals].to_i
     end.first[:id]
 
     update_attributes(nested_attributes_hash.merge(winner_id: winner_id))
