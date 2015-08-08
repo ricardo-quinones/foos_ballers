@@ -1,8 +1,8 @@
 = render layout: 'layouts/panel_view', locals: { header: 'Sign up', panel: 'signUp'} do
   .content-wrapper
     %form{"name"=>"signUpForm", "ng-controller"=>"SignUpController", "no-validate"=>"", "form-submit"=>"signUp()"}
-      %input{"ng-model"=>"signUpFormData.name", "placeholder"=>"Name", "type"=>"text"}
-      %input{"ng-model"=>"signUpFormData.email", "placeholder"=>"Email", "type"=>"email"}
-      %input{"ng-model"=>"signUpFormData.password", "type"=>"password", "placeholder"=>"Password"}
-      %input{"ng-model"=>"signUpFormData.password_confirmation", "type"=>"password", "placeholder"=>"Password Confirmation"}
+      %input{"ng-model"=>"signUpFormData.name", "placeholder"=>"Name", "type"=>"text", "required"=>"", "ng-required"=>"true"}
+      %input{"ng-model"=>"signUpFormData.email", "placeholder"=>"Email", "type"=>"email", "required"=>"", "ng-required"=>"true"}
+      %input{"ng-model"=>"signUpFormData.password", "type"=>"password", "placeholder"=>"Password", "required"=>"", "ng-required"=>"true"}
+      %input{"ng-model"=>"signUpFormData.password_confirmation", "type"=>"password", "placeholder"=>"Password Confirmation", "required"=>"", "ng-required"=>"true"}
       %button.submit-button{"type"=>"submit"} Sign Up
