@@ -11,7 +11,7 @@ class Player < ActiveRecord::Base
   validates_uniqueness_of :auth_token, :email
   validates_presence_of :email
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  before_create :generate_authentication_token!
+  before_create :generate_authentication_token!, :bankify_name
 
   class << self
     def game_stats
@@ -55,5 +55,9 @@ class Player < ActiveRecord::Base
     begin
       self.auth_token = SecureRandom::base64(25)
     end while self.class.exists?(auth_token: auth_token)
+  end
+
+  def bankify_name
+    self.name = name + " Bank"
   end
 end
