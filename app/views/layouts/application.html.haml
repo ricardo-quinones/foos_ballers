@@ -10,7 +10,7 @@
     = render 'layouts/navigation_drawer'
 
     .non-drawer-content
-      .non-drawer-content-overlay{"ng-click"=>"$emit('closeNav')"}
+      .non-drawer-content-overlay{"mobile-click"=>"$emit('closeNav')"}
       .scrollable-content
         = render 'layouts/header'
         = yield

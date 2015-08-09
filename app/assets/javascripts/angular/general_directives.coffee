@@ -101,6 +101,14 @@ angular.module('general_directives', [])
 
   }
 
+.directive 'mobileClick', [ ->
+    (scope, elem, attrs) ->
+      elem.bind 'touchstart click', (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+        scope.$apply(attrs["mobileClick"])
+]
+
 .directive 'restrictToMaxTags', ->
   KEY_BACKSPACE =  8
   KEY_TAB = 9
