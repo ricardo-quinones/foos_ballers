@@ -69,7 +69,7 @@ angular.module('general_directives', [])
     }
 ]
 
-.directive 'focusElement', ->
+.directive 'focusLike', ->
   {
     link: (scope, elem, attr, ctrl) ->
       findInput = ->
@@ -77,10 +77,17 @@ angular.module('general_directives', [])
 
       input = findInput()
       if input
-        input.blur  -> elem.removeClass('focus')
+        input.blur -> elem.removeClass('focus')
 
       scope.$on 'inputFocused', (e, elementToFocus) ->
         elementToFocus.addClass('focus')
+  }
+
+.directive 'focusElement', ->
+  {
+    link: (scope, elem, attr, ctrl) ->
+      findInput = ->
+        if elem.is('input') then elem else elem.find('input')
 
       scope.$watch ->
         try

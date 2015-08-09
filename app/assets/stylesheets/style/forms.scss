@@ -80,12 +80,28 @@ tags-input {
         font-size: inherit !important;
         height: 2em;
         line-height: 2em;
+
+        .remove-button {
+          font-size: 1em;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
     }
   }
 
   & + tags-input {
     margin-top: em(20px);
+  }
+
+  .autocomplete .suggestion-item {
+    font-size: 1em;
+
+    *, em {
+      font-size: 1em;
+    }
   }
 }
 
