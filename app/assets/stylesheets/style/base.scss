@@ -42,6 +42,11 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  -webkit-transition: -webkit-transform $default-bezier-transition;
+  -moz-transition: -moz-transform $default-bezier-transition;
+  -o-transition: -o-background-color $default-bezier-transition;
+  -ms-transition: -ms-transform $default-bezier-transition;
+  transition: -ms-transform $default-bezier-transition;
   transition: transform $default-bezier-transition;
   -webkit-overflow-scrolling: touch;
 }
