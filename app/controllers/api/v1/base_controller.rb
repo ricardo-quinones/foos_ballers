@@ -8,10 +8,11 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def get_player
-    auth_token = request.headers['HTTP_AUTHORIZATION']
-    unless auth_token.nil?
-      decrypted_auth_token = Base64.strict_decode64(auth_token)
-      @player = Player.find_by(auth_token: decrypted_auth_token)
+    access_token = request.headers['HTTP_AUTHORIZATION']
+    unless access_token.nil?
+      decrypted_access_token = Base64.strict_decode64(access_token)
+      @api_key = ApiKey.find_by(access_token: decrypted_access_token, active: true)
+      @player = @api_key.player
     end
     raise ApiErrors::AuthTokenNotFoundError unless @player
   end

@@ -152,10 +152,10 @@ describe Api::V1::PlayersController, type: :controller do
   end
 
   describe "GET first_unfinished_match" do
-    let(:auth_token) { player.encrypted_auth_token }
+    let(:access_token) { player.api_keys.first.encrypted_access_token }
 
     before do
-      request.headers['HTTP_AUTHORIZATION'] = auth_token
+      request.headers['HTTP_AUTHORIZATION'] = access_token
       get :first_unfinished_match, id: player.id
     end
 

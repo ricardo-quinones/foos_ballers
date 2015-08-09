@@ -9,7 +9,7 @@ class Api::V1::PlayersController < Api::V1::BaseController
     player = Player.new(player_params)
     player.save!
     session[:current_user_id] = player.id
-    render json: { auth_token: player.encrypted_auth_token, player: player.stats.as_json }, status: :created
+    render json: { auth_token: player.first_active_encrypted_access_token, player: player.stats.as_json }, status: :created
   rescue ActiveRecord::RecordInvalid => e
     render json: { developer_error: e.message, messages: player.errors.full_messages }, status: :bad_request
   end

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805040322) do
+ActiveRecord::Schema.define(version: 20150809171850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token"
+    t.integer  "player_id"
+    t.boolean  "active",       default: true
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "api_keys", ["access_token", "active"], name: "index_api_keys_on_access_token_and_active", unique: true, using: :btree
+  add_index "api_keys", ["player_id"], name: "index_api_keys_on_player_id", using: :btree
 
   create_table "match_participants", force: :cascade do |t|
     t.integer  "team_id"
@@ -39,7 +50,6 @@ ActiveRecord::Schema.define(version: 20150805040322) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "auth_token"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -48,7 +58,6 @@ ActiveRecord::Schema.define(version: 20150805040322) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "players", ["auth_token"], name: "index_players_on_auth_token", unique: true, using: :btree
   add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree
 
   create_table "team_members", force: :cascade do |t|

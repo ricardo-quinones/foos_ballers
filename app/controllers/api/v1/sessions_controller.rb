@@ -12,7 +12,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def destroy
-    @player.reset_authentication_token!
+    @api_key.inactivate!
     session.delete(:current_user_id)
     head :accepted
   end

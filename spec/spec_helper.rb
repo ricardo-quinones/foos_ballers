@@ -6,6 +6,8 @@ require 'vcr'
 RSpec.configure do |config|
   config.render_views = true
   config.use_transactional_fixtures = false
+  config.color = true
+  config.tty = true
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
