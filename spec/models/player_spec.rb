@@ -60,4 +60,10 @@ describe Player do
     subject { create(:player, name: 'Mayank') }
     its(:name) { is_expected.to eq('Mayank Bank') }
   end
+
+  describe "#generate_new_api_key!" do
+    subject { create(:player) }
+    its(:api_keys)                     { is_expected.not_to be_empty }
+    its('api_keys.first.access_token') { is_expected.to be_a(String) }
+  end
 end

@@ -103,8 +103,10 @@ describe Api::V1::MatchesController, type: :controller do
     end
 
     context 'as an authorized player' do
+      let(:api_key) { match.players.first.api_keys.first }
+
       before do
-        request.headers['HTTP_AUTHORIZATION'] = match.players.first.encrypted_auth_token
+        request.headers['HTTP_AUTHORIZATION'] = api_key.encrypted_access_token
       end
 
       context 'the response' do
@@ -122,7 +124,7 @@ describe Api::V1::MatchesController, type: :controller do
       it "correctly updates the goals of the winner" do
         expect {
           put :update, { match: update_params }.merge(id: match.id)
-        }.to change { loser.reload.goals }.from(nil).to(8)
+        }.to change { loser.reload.goals }.from(0).to(8)
       end
     end
   end

@@ -7,11 +7,13 @@ class Player < ActiveRecord::Base
   has_many :teams,   through: :team_members, source: :team
   has_many :matches, through: :teams,        source: :matches
   has_many :wins,    through: :teams,        source: :wins
+  has_many :api_keys
 
-  validates_uniqueness_of :auth_token, :email
-  validates_presence_of :email
+  validates_uniqueness_of :email
+  validates_presence_of   :email
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  before_create :generate_authentication_token!, :bankify_name
+
+  before_create :build_new_api_key, :bankify_name
 
   class << self
     def game_stats
@@ -32,13 +34,8 @@ class Player < ActiveRecord::Base
     matches - wins
   end
 
-  def reset_authentication_token!
-    generate_authentication_token!
-    save!
-  end
-
-  def encrypted_auth_token
-    Base64.strict_encode64(auth_token.to_s)
+  def inactivate_api_key!(api_key)
+    api_key.inactivate!
   end
 
   def stats
@@ -49,12 +46,18 @@ class Player < ActiveRecord::Base
     matches.includes(:players).unfinished.order('matches.id ASC').first
   end
 
+  def first_active_encrypted_access_token
+    api_keys.first.encrypted_access_token
+  end
+
+  def generate_new_api_key!
+    api_keys.create!(access_token: ApiKey.generate_access_token!)
+  end
+
   private
 
-  def generate_authentication_token!
-    begin
-      self.auth_token = SecureRandom::base64(25)
-    end while self.class.exists?(auth_token: auth_token)
+  def build_new_api_key
+    api_keys.build
   end
 
   def bankify_name
