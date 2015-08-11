@@ -9,7 +9,7 @@ angular.module('foosBallers', [
 ])
 
 .config ['$httpProvider', 'tagsInputConfigProvider', ($httpProvider, tagsInputConfigProvider) ->
-  tagsInputConfigProvider.setTextAutosizeThreshold(200)
+  tagsInputConfigProvider.setTextAutosizeThreshold(400)
   ct = $("meta[name=\"csrf-token\"]").attr("content")
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = ct
   $httpProvider.defaults.headers.post["Content-Type"]   = 'application/json'
