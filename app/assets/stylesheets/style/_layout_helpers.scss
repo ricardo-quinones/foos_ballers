@@ -12,6 +12,20 @@
   }
 }
 
+%bootstrap-col-padding {
+  padding-left: em(15px);
+  padding-right: em(15px);
+}
+
+$bootstrap-grid-breakpoints: "xs" "sm" "md" "lg";
+@for $i from 1 through 12 {
+  @each $breakpoint in $bootstrap-grid-breakpoints {
+    .col-#{$breakpoint}-#{$i} {
+      @extend %bootstrap-col-padding;
+    }
+  }
+}
+
 // Create mapping of class naming aliases with the margin type properties
 $directions: (
   top:    "top",

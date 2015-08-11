@@ -38,10 +38,10 @@
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
+  @include translate(0, -50%);
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
   border-radius: 50%;
   border: 1px solid $green;
   background-color: white;
