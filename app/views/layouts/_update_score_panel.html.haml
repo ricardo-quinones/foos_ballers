@@ -3,9 +3,9 @@
     %form{"name"=>"updateMatchForm", "no-validate"=>"", "form-submit"=>"postScore()"}
       .match-participant-title {{ matchParticipantTitle(currentMatch.teams[0]) }}
 
-      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[0]", "form-name"=>"team1Goals", "min"=>"0", "max"=>"10"}<
+      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[0]", "form-name"=>"team1Goals", "min"=>"0"}<
       .vs vs
-      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[1]", "form-name"=>"team2Goals", "min"=>"0", "max"=>"10"}<
+      .match-participant-score{"match-participant-score"=>"currentMatch.match_participants_attributes[1]", "form-name"=>"team2Goals", "min"=>"0"}<
 
       .match-participant-title {{ matchParticipantTitle(currentMatch.teams[1]) }}
 
