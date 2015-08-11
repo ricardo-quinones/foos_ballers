@@ -51,7 +51,7 @@ class Player < ActiveRecord::Base
   end
 
   def generate_new_api_key!
-    api_keys.create!
+    api_keys.create!(access_token: ApiKey.generate_access_token!)
   end
 
   private

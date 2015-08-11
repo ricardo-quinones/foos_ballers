@@ -5,6 +5,14 @@ class ApiKey < ActiveRecord::Base
 
   before_create :generate_access_token!
 
+  def self.generate_access_token!
+    begin
+      access_token = SecureRandom::base64(25)
+    end while exists?(access_token: access_token)
+
+    access_token
+  end
+
   def inactivate!
     update_attribute(:active, false)
   end
@@ -16,8 +24,6 @@ class ApiKey < ActiveRecord::Base
   private
 
   def generate_access_token!
-    begin
-      self.access_token = SecureRandom::base64(25)
-    end while self.class.exists?(access_token: access_token)
+    self.access_token ||= ApiKey.generate_access_token!
   end
 end
