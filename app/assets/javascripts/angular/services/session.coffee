@@ -2,6 +2,11 @@ angular.module('services.session', [])
 
 .service 'Session', ['$http', '$cookies', 'BASE_URL', 'CKID',
   ($http, $cookies, BASE_URL, CKID) ->
+    @clearCredentials = ->
+      delete $http.defaults.headers.common.Authorization
+      $cookies.remove(CKID)
+      @currentUser = null
+
     @loginUserWithCredentials = (token, player) =>
       $http.defaults.headers.common.Authorization = token
       $cookies.put(CKID, token)
@@ -16,9 +21,7 @@ angular.module('services.session', [])
     @logout = =>
       $http.delete("#{BASE_URL}/sessions")
       .success (data, status, headers, config) =>
-        delete $http.defaults.headers.common.Authorization
-        $cookies.remove(CKID)
-        @currentUser = null
+        @clearCredentials()
 
     return @
 ]

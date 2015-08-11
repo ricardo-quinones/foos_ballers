@@ -23,8 +23,8 @@ angular.module('foosBallers', [
     $http.defaults.headers.common.Authorization = at
 ]
 
-.factory 'interceptHandler', ['$q', 'DEFAULT_ERROR_MESSAGE',
-  ($q, DEFAULT_ERROR_MESSAGE) ->
+.factory 'interceptHandler', ['$q', '$rootScope', 'DEFAULT_ERROR_MESSAGE',
+  ($q, $rootScope, DEFAULT_ERROR_MESSAGE) ->
     errorMessages = (response) ->
       if _.isArray(response.data.messages)
         response.data.messages
@@ -33,7 +33,9 @@ angular.module('foosBallers', [
 
     {
       responseError: (response) ->
-        if response.status && response.status >= 300
+        if response.status && response.status >= 400
+          if response.status == 401
+            $rootScope.$broadcast('updateLogin')
           $q.reject(errorMessages(response))
         else
           response

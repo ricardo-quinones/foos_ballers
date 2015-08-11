@@ -29,6 +29,11 @@ angular.module('controllers.main', [])
       $scope.$broadcast('setCurrentMatch', currentMatch)
       $scope.$emit('openPanel', 'updateScore')
 
+    $scope.$on 'updateLogin', ->
+      Session.logout()
+      $scope.$emit('openPanel', 'login')
+      $scope.$emit('displayError', 'Oops! Looks like you need to login again.')
+
     $scope.currentUser = ->
       Session.currentUser
 

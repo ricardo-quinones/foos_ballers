@@ -53,7 +53,7 @@ group :test, :development do
   gem 'pry'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
-  gem 'pry-byebug'
+  gem 'pry-byebug', '~> 1.3.3'
   gem 'thin'
   gem 'spring'
   gem 'spring-commands-rspec', require: false

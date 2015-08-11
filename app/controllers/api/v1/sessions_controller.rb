@@ -12,7 +12,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def destroy
-    @api_key.inactivate!
+    @api_key.try(:inactivate!)
     session.delete(:current_user_id)
     head :accepted
   end

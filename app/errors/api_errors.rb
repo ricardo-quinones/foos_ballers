@@ -38,7 +38,7 @@ module ApiErrors
     def initialize
       @developer_error = 'Auth token was not found'
       @messages        = ["Sorry, we could not complete your request"]
-      @status          = :not_found
+      @status          = :unauthorized
     end
   end
 end

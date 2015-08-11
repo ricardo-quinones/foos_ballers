@@ -8,12 +8,18 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def get_player
-    access_token = request.headers['HTTP_AUTHORIZATION']
-    unless access_token.nil?
-      decrypted_access_token = Base64.strict_decode64(access_token)
-      @api_key = ApiKey.find_by(access_token: decrypted_access_token, active: true)
-      @player = @api_key.player
+    begin
+      access_token = request.headers['HTTP_AUTHORIZATION']
+      unless access_token.nil?
+        decrypted_access_token = Base64.strict_decode64(access_token)
+        @api_key = ApiKey.find_by(access_token: decrypted_access_token, active: true)
+        @player = @api_key.try(:player)
+      end
+    rescue ActiveRecord::StatementInvalid
     end
-    raise ApiErrors::AuthTokenNotFoundError unless @player
+
+    if !@player && (params[:controller] != 'api/v1/sessions' && params[:action] != 'destroy')
+      raise ApiErrors::AuthTokenNotFoundError
+    end
   end
 end
