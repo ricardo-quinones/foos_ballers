@@ -4,9 +4,9 @@
       .ib-col-8>
         %span> Foosballer
       .ib-col-4>
-        %span> {{ currentStatHeaderTitle() }}
+        %span{"ng-cloak"=>""}> {{ currentStatHeaderTitle() }}
     %ul.no-list-style.leader-board-list
-      %li{"ng-repeat"=>"player in players()"}
+      %li{"ng-repeat"=>"player in players()", "ng-cloak"=>""}
         .player.container
           .rank{"rank"=>"{{ rank(player) }}"} {{ rank(player) }}
           .col-xs-8
