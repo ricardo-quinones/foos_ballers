@@ -57,4 +57,5 @@ group :test, :development do
   gem 'thin'
   gem 'spring'
   gem 'spring-commands-rspec', require: false
+  gem 'jasmine-rails'
 end

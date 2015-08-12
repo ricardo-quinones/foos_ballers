@@ -1,0 +1,7 @@
+spec_files:
+  - "**/*[Ss]pec.{js.coffee,js,coffee}"
+
+# path to directory of temporary files
+# (spec runner and asset cache)
+# defaults to tmp/jasmine
+tmp_dir: "tmp/jasmine"

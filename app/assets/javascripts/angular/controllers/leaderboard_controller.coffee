@@ -21,7 +21,7 @@ angular.module('controllers.leaderboard', [])
       STAT_TITLE_MAPPING[$scope.displayedStat]
 
     $scope.rankingArray = ->
-      _.sortBy(_.uniq(_.map $scope.players(), (p) -> $scope.currentStat(p)), (el) -> -el)
+      _.sortBy(_.map($scope.players(), (p) -> $scope.currentStat(p)), (el) -> -el)
 
     $scope.rank = (player) ->
       _.indexOf($scope.rankingArray(), $scope.currentStat(player)) + 1

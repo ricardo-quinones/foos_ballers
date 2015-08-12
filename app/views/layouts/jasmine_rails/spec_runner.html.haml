@@ -1,0 +1,13 @@
+!!!5
+%html
+  %head
+    %meta{"content"=>"text/html;charset=UTF-8", "http-equiv"=>"Content-Type"}
+    %title Jasmine Specs
+
+    = stylesheet_link_tag *jasmine_css_files
+    = render 'layouts/included_javascripts'
+
+    = javascript_include_tag *jasmine_js_files
+  %body
+    #jasmine_content
+    = yield
