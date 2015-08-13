@@ -8,11 +8,14 @@ class Team < ActiveRecord::Base
   class << self
     def game_stats
       select(:id).
-      select('array_agg(players.name) as player_names').
+      select('array_agg(distinct players.name) as player_names').
       select('COUNT(distinct matches.id) AS games').
-      select("SUM(CASE WHEN match_participants.id = matches.winner_id THEN 1 ELSE 0 END) / 2 AS games_won").
-      joins('LEFT JOIN "match_participants" ON "match_participants"."team_id" = "teams"."id"').
-      joins('LEFT JOIN "matches" ON "matches"."id" = "match_participants"."match_id"').
+      select("SUM(CASE WHEN mp1.id = matches.winner_id THEN 1 ELSE 0 END) / 2 AS games_won").
+      select("SUM(mp1.goals) AS goals_scored").
+      select("SUM(mp2.goals) AS goals_allowed").
+      joins('LEFT JOIN "match_participants" mp1 ON "mp1"."team_id" = "teams"."id"').
+      joins('LEFT JOIN "matches" ON "matches"."id" = "mp1"."match_id"').
+      joins('LEFT JOIN "match_participants" mp2 ON "mp2"."match_id" = "matches"."id" AND "mp2"."id" != "mp1"."id"').
       joins(:players).
       group(:id)
     end
