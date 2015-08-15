@@ -10,7 +10,14 @@ angular.module('services.players', [])
         @games     = player.games
         @games_won = -> player.games_won
 
+      total_games: ->
+        @games
+
+      losses: ->
+        @games - @games_won()
+
       winning_percentage: ->
+        return 0 unless @games
         parseInt(@games_won() / @games * 100)
 
     @fetch = ->

@@ -7,9 +7,21 @@ angular.module('controllers.leaderboard', [])
     $scope.displayedStat = 'games_won'
 
     STAT_TITLE_MAPPING = {
-      'games_won': 'Games won',
+      'games_won':          'Games won',
       'winning_percentage': 'Winning percentage'
+      'total_games':        'Total games',
+      'losses':             'Losses'
     }
+
+    $scope.possibleStats = ->
+      _.keys(STAT_TITLE_MAPPING)
+
+    $scope.statLabel = (stat) ->
+      STAT_TITLE_MAPPING[stat]
+
+    $scope.changeDisplayedStat = (stat) ->
+      $scope.displayedStat    = stat
+      $scope.showStatDropdown = false
 
     $scope.players = ->
       Players.all
