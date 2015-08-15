@@ -3,6 +3,10 @@
     padding-left: em(15px);
     padding-right: em(15px);
   }
+
+  &.bottom-align > [class*="ib-col"] {
+    vertical-align: bottom;
+  }
 }
 
 @for $i from 1 through 12 {

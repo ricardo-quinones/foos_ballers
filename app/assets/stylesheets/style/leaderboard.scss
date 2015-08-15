@@ -59,3 +59,75 @@
 span {
   color: inherit;
 }
+
+.stats-list {
+  span { font-size: 1.25em; }
+
+  > a {
+    color: #AAA;
+    text-decoration: none;
+  }
+
+  > ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    text-align: right;
+    margin-top: 1px;
+    margin-bottom: 0;
+    list-style: none;
+    z-index: 1;
+    background-color: white;
+    padding-left: 0;
+    @include box-shadow(10px 50px 65px rgba(40, 40, 40, 0.3));
+    overflow: hidden;
+
+    > li {
+      list-style: none;
+      max-height: 0;
+
+      @include transition(
+        max-height $default-bezier-transition,
+        border-color $default-bezier-transition
+      );
+
+      > a {
+        display: block;
+        padding-top: em(10px);
+        padding-bottom: em(10px);
+        padding-left: em(10px);
+        padding-right: em(10px);
+        color: #AAA;
+        text-decoration: none;
+        @include transition(
+          background-color $default-bezier-transition,
+          color $default-bezier-transition
+        );
+
+        &.selected, &.selected:hover {
+          background-color: rgba(#8ACDCE, 0.35);
+          color: white;
+        }
+
+        &:hover {
+          background-color: rgba(#8ACDCE, 0.5);
+          color: white;
+        }
+      }
+
+      + li {
+        border-top: 1px solid transparent;
+      }
+    }
+
+    &.open {
+      > li {
+        max-height: 4em;
+
+        + li {
+          border-color: $green;
+        }
+      }
+    }
+  }
+}
