@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809171850) do
+ActiveRecord::Schema.define(version: 20150816134556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,26 @@ ActiveRecord::Schema.define(version: 20150809171850) do
     t.datetime "avatar_updated_at"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "current_rating_id"
   end
 
+  add_index "players", ["current_rating_id"], name: "index_players_on_current_rating_id", using: :btree
   add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "value"
+    t.float    "trueskill_mean"
+    t.float    "trueskill_deviation"
+    t.integer  "previous_rating_id"
+    t.integer  "player_id",           null: false
+    t.integer  "match_id",            null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "ratings", ["match_id"], name: "index_ratings_on_match_id", using: :btree
+  add_index "ratings", ["player_id"], name: "index_ratings_on_player_id", using: :btree
+  add_index "ratings", ["previous_rating_id"], name: "index_ratings_on_previous_rating_id", using: :btree
 
   create_table "team_members", force: :cascade do |t|
     t.integer  "player_id"
@@ -75,4 +92,6 @@ ActiveRecord::Schema.define(version: 20150809171850) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "ratings", "matches"
+  add_foreign_key "ratings", "players"
 end

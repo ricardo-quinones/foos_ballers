@@ -18,6 +18,7 @@ gem 'factory_girl_rails', :require => false
 gem 'rails4-autocomplete', git: 'https://github.com/ricardo-quinones/rails4-autocomplete.git', branch: 'master'
 gem 'angular-rails-templates'
 gem 'sprockets', '2.12.3'
+gem 'trueskill', git: 'https://github.com/saulabs/trueskill.git', branch: 'master'
 
 group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

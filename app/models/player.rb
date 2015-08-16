@@ -9,6 +9,9 @@ class Player < ActiveRecord::Base
   has_many :matches,            through: :teams,        source: :matches
   has_many :wins,               through: :teams,        source: :wins
   has_many :api_keys
+  has_many :ratings
+
+  belongs_to :current_rating, class_name: 'Rating'
 
   validates_uniqueness_of :email
   validates_presence_of   :email
@@ -35,7 +38,7 @@ class Player < ActiveRecord::Base
   end
 
   def losses
-    matches - wins
+    matches.where.not(winner_id: nil) - wins
   end
 
   def inactivate_api_key!(api_key)
@@ -56,6 +59,21 @@ class Player < ActiveRecord::Base
 
   def generate_new_api_key!
     api_keys.create!(access_token: ApiKey.generate_access_token!)
+  end
+
+  def set_current_rating(mean, deviation, match)
+    self.current_rating = ratings.build do |r|
+      r.value               = RatingService.rating(mean, deviation)
+      r.trueskill_mean      = mean
+      r.trueskill_deviation = deviation
+      r.previous_rating     = current_rating
+      r.match               = match
+    end
+  end
+
+  def set_current_rating!(mean, deviation, match)
+    set_current_rating(mean, deviation, match)
+    save!
   end
 
   private
