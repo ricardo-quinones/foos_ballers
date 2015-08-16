@@ -26,6 +26,9 @@ class Match < ActiveRecord::Base
       b[:goals].to_i <=> a[:goals].to_i
     end.first[:id]
 
-    update_attributes(nested_attributes_hash.merge(winner_id: winner_id))
+    Match.transaction do
+      RatingService.update_ratings(self, winner_id, nested_attributes_hash)
+      update_attributes(nested_attributes_hash.merge(winner_id: winner_id))
+    end
   end
 end
