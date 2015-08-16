@@ -7,14 +7,15 @@ angular.module('controllers.leaderboard', [])
     $scope.displayedStat = 'rating'
 
     STAT_TITLE_MAPPING = {
-      'games_won':          'Games won',
-      'winning_percentage': 'Winning percentage'
-      'total_games':        'Total games',
-      'losses':             'Losses',
-      'rating':             'Rating',
-      'goals_scored':       'Goals Scored',
-      'goals_allowed':      'Goals Allowed',
-      'goal_differential':  'Goal Differential'
+      'games_won':             'Games won',
+      'winning_percentage':    'Winning percentage'
+      'total_games':           'Total games',
+      'losses':                'Losses',
+      'rating':                'Rating',
+      'goals_scored':          'Goals Scored',
+      'goals_allowed':         'Goals Allowed',
+      'goal_differential':     'Goal Differential',
+      'avg_goal_differential': 'Avg Goal Differential'
     }
 
     $scope.possibleStats = ->

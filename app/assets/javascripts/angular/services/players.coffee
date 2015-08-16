@@ -29,6 +29,15 @@ angular.module('services.players', [])
       goal_differential: ->
         @goals_scored() - @goals_allowed()
 
+      avg_goal_differential: ->
+        total_games = @total_games()
+        return 0 unless total_games
+        @goal_differential() / total_games
+
+      avg_goal_differential_formatter: ->
+        avg = Math.round(@avg_goal_differential() * 10) / 10
+        "#{avg}/match"
+
     @fetch = ->
       $http.get("#{BASE_URL}/players")
       .success (data, status, headers, config) =>
