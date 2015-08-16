@@ -6,9 +6,12 @@ angular.module('services.players', [])
 
     class Player
       constructor: (player) ->
-        @name      = player.name
-        @games     = player.games
-        @games_won = -> player.games_won
+        @name              = player.name
+        @games             = player.games
+        @rating            = -> player.rating
+        @goals_scored      = -> player.goals_scored
+        @goals_allowed     = -> player.goals_allowed
+        @games_won         = -> player.games_won
 
       total_games: ->
         @games
@@ -19,6 +22,12 @@ angular.module('services.players', [])
       winning_percentage: ->
         return 0 unless @games
         parseInt(@games_won() / @games * 100)
+
+      winning_percentage_formatter: ->
+        "#{@winning_percentage()}%"
+
+      goal_differential: ->
+        @goals_scored() - @goals_allowed()
 
     @fetch = ->
       $http.get("#{BASE_URL}/players")

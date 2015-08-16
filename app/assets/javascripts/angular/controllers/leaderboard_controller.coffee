@@ -4,13 +4,17 @@ angular.module('controllers.leaderboard', [])
   ($scope, Players) ->
     Players.fetch()
 
-    $scope.displayedStat = 'games_won'
+    $scope.displayedStat = 'rating'
 
     STAT_TITLE_MAPPING = {
       'games_won':          'Games won',
       'winning_percentage': 'Winning percentage'
       'total_games':        'Total games',
-      'losses':             'Losses'
+      'losses':             'Losses',
+      'rating':             'Rating',
+      'goals_scored':       'Goals Scored',
+      'goals_allowed':      'Goals Allowed',
+      'goal_differential':  'Goal Differential'
     }
 
     $scope.possibleStats = ->
@@ -25,6 +29,12 @@ angular.module('controllers.leaderboard', [])
 
     $scope.players = ->
       Players.all
+
+    $scope.currentStatDisplay = (player) ->
+      if player["#{$scope.displayedStat}_formatter"]
+        player["#{$scope.displayedStat}_formatter"]()
+      else
+        $scope.currentStat(player)
 
     $scope.currentStat = (player) ->
       player[$scope.displayedStat]()

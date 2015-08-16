@@ -25,14 +25,16 @@ class Player < ActiveRecord::Base
       select(:name).
       select('COUNT(matches.id) AS games').
       select("SUM(CASE WHEN mp1.id = matches.winner_id THEN 1 ELSE 0 END) AS games_won").
-      select("SUM(mp1.goals) AS goals_scored").
-      select("SUM(mp2.goals) AS goals_allowed").
+      select("COALESCE(SUM(mp1.goals), 0) AS goals_scored").
+      select("COALESCE(SUM(mp2.goals), 0) AS goals_allowed").
+      select("COALESCE(ratings.value, 0) as rating").
       joins('LEFT JOIN "team_members" ON "team_members"."player_id" = "players"."id"').
       joins('LEFT JOIN "teams" ON "teams"."id" = "team_members"."team_id"').
       joins('LEFT JOIN "match_participants" mp1 ON "mp1"."team_id" = "teams"."id"').
       joins('LEFT JOIN "matches" ON "matches"."id" = "mp1"."match_id"').
       joins('LEFT JOIN "match_participants" mp2 ON "mp2"."match_id" = "matches"."id" AND "mp2"."id" != "mp1"."id"').
-      group(:id).
+      joins('LEFT JOIN "ratings" ON "ratings"."id" = "players"."current_rating_id"').
+      group([:id, '"ratings"."value"']).
       order('games_won DESC')
     end
   end
