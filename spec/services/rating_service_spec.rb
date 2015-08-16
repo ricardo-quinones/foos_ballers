@@ -67,6 +67,5 @@ describe RatingService do
         its('current_rating.trueskill_deviation') { is_expected.to be < RatingService::DEFAULT_DEVIATION }
       end
     end
-
   end
 end
