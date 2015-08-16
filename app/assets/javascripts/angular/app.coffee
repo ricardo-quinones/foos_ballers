@@ -1,4 +1,4 @@
-angular.module('foosBallers', [
+angular.module('downToFoos', [
   'templates',
   'ngCookies',
   'ngTagsInput',

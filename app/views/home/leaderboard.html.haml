@@ -6,7 +6,7 @@
       .ib-col-4.stats-list>
         %a{"ng-cloak"=>"", "ng-click"=>"showStatDropdown = !showStatDropdown"}>
           %span> {{ currentStatHeaderTitle() }}
-        %ul{"ng-class"=>"{open: showStatDropdown}"}>
+        %ul.no-list-style{"ng-class"=>"{open: showStatDropdown}"}>
           %li{"ng-cloak"=>"", "ng-repeat"=>"stat in possibleStats()"}<
             %a{"ng-click"=>"changeDisplayedStat(stat)", "ng-class"=>"{selected: stat == displayedStat}"}>
               %span>{{ statLabel(stat) }}
