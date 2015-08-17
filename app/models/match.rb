@@ -2,7 +2,7 @@ class Match < ActiveRecord::Base
   has_many :match_participants
   has_many :teams,   through: :match_participants, source: :team
   has_many :players, through: :teams,              source: :players
-  has_one  :rating
+  has_many :ratings
 
   belongs_to :winner, class_name: 'MatchParticipant'
 
