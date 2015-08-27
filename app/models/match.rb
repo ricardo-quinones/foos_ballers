@@ -32,4 +32,24 @@ class Match < ActiveRecord::Base
       update_attributes(nested_attributes_hash.merge(winner_id: winner_id))
     end
   end
+
+  def reset!
+    Match.transaction do
+      players.each do |p|
+        rating_to_destroy = p.current_rating
+        p.current_rating = p.current_rating.previous_rating
+        rating_to_destroy.destroy
+        p.save!
+      end
+
+      match_participants.first.goals = 0
+      match_participants.last.goals  = 0
+
+      match_participants.first.save!
+      match_participants.last.save!
+
+      self.winner = nil
+      save!
+    end
+  end
 end
