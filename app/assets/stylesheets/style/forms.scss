@@ -22,6 +22,10 @@ input[type="number"] {
   }
 }
 
+input {
+  text-align: left;
+}
+
 input:focus, .focus {
   outline: none !important;
   border-color: $green !important;
